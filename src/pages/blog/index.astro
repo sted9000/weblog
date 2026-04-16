@@ -1,0 +1,14 @@
+---
+import Base from '../../layouts/Base.astro';
+import Entry from '../../components/Entry.astro';
+import { getCollection } from 'astro:content';
+
+const entries = (await getCollection('blog')).sort(
+  (a, b) => b.data.date.getTime() - a.data.date.getTime()
+);
+---
+<Base title="Blog">
+  <h2>Blog</h2>
+  {entries.length === 0 && <p>No posts yet.</p>}
+  {entries.map((entry) => <Entry entry={entry} type="blog" />)}
+</Base>

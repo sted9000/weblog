@@ -1,0 +1,17 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getAllTags } from '../../lib/stream';
+
+const tagMap = await getAllTags();
+const tags = [...tagMap.entries()].sort((a, b) => b[1].length - a[1].length);
+const base = import.meta.env.BASE_URL;
+---
+<Base title="Tags">
+  <h2>Tags</h2>
+  {tags.length === 0 && <p>No tags yet.</p>}
+  <div class="tags" style="font-size: 0.95rem; line-height: 2;">
+    {tags.map(([tag, items]) => (
+      <a class="tag" href={`${base}/tags/${tag}`}>{tag} <span style="color: var(--muted)">({items.length})</span></a>
+    ))}
+  </div>
+</Base>

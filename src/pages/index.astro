@@ -1,0 +1,13 @@
+---
+import Base from '../layouts/Base.astro';
+import Entry from '../components/Entry.astro';
+import { getAllItems } from '../lib/stream';
+
+const items = await getAllItems();
+---
+<Base>
+  {items.length === 0 && <p>Nothing posted yet.</p>}
+  {items.map(({ entry, type }) => (
+    <Entry entry={entry} type={type} />
+  ))}
+</Base>

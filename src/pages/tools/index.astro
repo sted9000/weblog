@@ -1,0 +1,14 @@
+---
+import Base from '../../layouts/Base.astro';
+import Entry from '../../components/Entry.astro';
+import { getCollection } from 'astro:content';
+
+const entries = (await getCollection('tools')).sort(
+  (a, b) => b.data.date.getTime() - a.data.date.getTime()
+);
+---
+<Base title="Tools">
+  <h2>Tools</h2>
+  {entries.length === 0 && <p>No tools yet.</p>}
+  {entries.map((entry) => <Entry entry={entry} type="tools" />)}
+</Base>

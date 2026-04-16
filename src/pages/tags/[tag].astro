@@ -1,0 +1,21 @@
+---
+import Base from '../../layouts/Base.astro';
+import Entry from '../../components/Entry.astro';
+import { getAllTags } from '../../lib/stream';
+
+export async function getStaticPaths() {
+  const tagMap = await getAllTags();
+  return [...tagMap.entries()].map(([tag, items]) => ({
+    params: { tag },
+    props: { items },
+  }));
+}
+
+const { tag } = Astro.params;
+const { items } = Astro.props;
+---
+<Base title={`Tag: ${tag}`}>
+  <h2>Tagged &ldquo;{tag}&rdquo;</h2>
+  <p class="meta">{items.length} {items.length === 1 ? 'entry' : 'entries'}</p>
+  {items.map(({ entry, type }) => <Entry entry={entry} type={type} />)}
+</Base>

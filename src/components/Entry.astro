@@ -1,0 +1,80 @@
+---
+import { render } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
+
+type AnyEntry =
+  | CollectionEntry<'blog'>
+  | CollectionEntry<'projects'>
+  | CollectionEntry<'tools'>
+  | CollectionEntry<'research'>;
+
+interface Props {
+  entry: AnyEntry;
+  type: 'blog' | 'projects' | 'tools' | 'research';
+  full?: boolean;
+}
+
+const { entry, type, full = false } = Astro.props;
+const base = import.meta.env.BASE_URL;
+const href = `${base}/${type}/${entry.id}`;
+const date = entry.data.date;
+const dateStr = date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+const { Content } = await render(entry);
+
+const typeLabels: Record<string, string> = {
+  blog: 'Blog',
+  projects: 'Project',
+  tools: 'Tool',
+  research: 'Research',
+};
+---
+<article class="entry">
+  <div class="entry-header">
+    <h2>
+      {full ? entry.data.title : <a href={href}>{entry.data.title}</a>}
+    </h2>
+    <span class="type-badge">{typeLabels[type]}</span>
+  </div>
+  <div class="meta">
+    <time datetime={date.toISOString()}>{dateStr}</time>
+  </div>
+
+  {type === 'projects' && (
+    <div class="proj-fields">
+      {(entry.data as any).status && <span>Status: {(entry.data as any).status}</span>}
+      {(entry.data as any).status && ((entry.data as any).repo || (entry.data as any).url) && <span> · </span>}
+      {(entry.data as any).url && <a href={(entry.data as any).url}>Site</a>}
+      {(entry.data as any).url && (entry.data as any).repo && <span> · </span>}
+      {(entry.data as any).repo && <a href={(entry.data as any).repo}>Repo</a>}
+    </div>
+  )}
+
+  {type === 'tools' && (entry.data as any).url && (
+    <div class="proj-fields">
+      <a href={(entry.data as any).url}>{(entry.data as any).url}</a>
+    </div>
+  )}
+
+  <div class="entry-body">
+    <Content />
+  </div>
+
+  {type === 'research' && ((entry.data as any).sources?.length ?? 0) > 0 && (
+    <div class="proj-fields">
+      <strong>Sources:</strong>
+      <ul class="compact">
+        {(entry.data as any).sources.map((s: { title: string; url: string }) => (
+          <li><a href={s.url}>{s.title}</a></li>
+        ))}
+      </ul>
+    </div>
+  )}
+
+  {entry.data.tags.length > 0 && (
+    <div class="tags">
+      {entry.data.tags.map((t: string) => (
+        <a class="tag" href={`${base}/tags/${t}`}>{t}</a>
+      ))}
+    </div>
+  )}
+</article>
