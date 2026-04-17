@@ -5,12 +5,11 @@ import type { CollectionEntry } from 'astro:content';
 type AnyEntry =
   | CollectionEntry<'blog'>
   | CollectionEntry<'projects'>
-  | CollectionEntry<'tools'>
-  | CollectionEntry<'research'>;
+  | CollectionEntry<'tools'>;
 
 interface Props {
   entry: AnyEntry;
-  type: 'blog' | 'projects' | 'tools' | 'research';
+  type: 'blog' | 'projects' | 'tools';
   full?: boolean;
 }
 
@@ -25,7 +24,6 @@ const typeLabels: Record<string, string> = {
   blog: 'Blog',
   projects: 'Project',
   tools: 'Tool',
-  research: 'Research',
 };
 ---
 <article class="entry">
@@ -58,17 +56,6 @@ const typeLabels: Record<string, string> = {
   <div class="entry-body">
     <Content />
   </div>
-
-  {type === 'research' && ((entry.data as any).sources?.length ?? 0) > 0 && (
-    <div class="proj-fields">
-      <strong>Sources:</strong>
-      <ul class="compact">
-        {(entry.data as any).sources.map((s: { title: string; url: string }) => (
-          <li><a href={s.url}>{s.title}</a></li>
-        ))}
-      </ul>
-    </div>
-  )}
 
   {entry.data.tags.length > 0 && (
     <div class="tags">

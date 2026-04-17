@@ -7,7 +7,7 @@ interface Props {
 }
 
 const { title, description } = Astro.props;
-const siteTitle = 'Ted Thomas';
+const siteTitle = 'Ted Slocum';
 const fullTitle = title ? `${title} — ${siteTitle}` : siteTitle;
 const base = import.meta.env.BASE_URL;
 ---
@@ -25,11 +25,9 @@ const base = import.meta.env.BASE_URL;
       <header class="site">
         <h1><a href={base}>{siteTitle}</a></h1>
         <nav>
-          <a href={base}>Stream</a>
           <a href={`${base}/projects`}>Projects</a>
           <a href={`${base}/blog`}>Blog</a>
           <a href={`${base}/tools`}>Tools</a>
-          <a href={`${base}/research`}>Research</a>
           <a href={`${base}/tags`}>Tags</a>
         </nav>
       </header>
@@ -37,7 +35,7 @@ const base = import.meta.env.BASE_URL;
         <slot />
       </main>
       <footer class="site">
-        <p>Projects, writing, tools, and research notes. <a href="https://github.com/sted9000/weblog">Source on GitHub</a>.</p>
+        <p>Projects, writing, and tools. <a href="https://github.com/sted9000/weblog">Source on GitHub</a>.</p>
       </footer>
     </div>
   </body>

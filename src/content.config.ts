@@ -32,12 +32,4 @@ const tools = defineCollection({
   }),
 });
 
-const research = defineCollection({
-  loader: glob({ pattern: '**/*.md', base: './src/content/research' }),
-  schema: z.object({
-    ...base,
-    sources: z.array(z.object({ title: z.string(), url: z.string().url() })).default([]),
-  }),
-});
-
-export const collections = { blog, projects, tools, research };
+export const collections = { blog, projects, tools };
