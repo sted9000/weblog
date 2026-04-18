@@ -1,27 +1,22 @@
 import { getCollection } from 'astro:content';
 import type { CollectionEntry } from 'astro:content';
 
-export type StreamType = 'blog' | 'projects' | 'tools';
+export type StreamType = 'blog' | 'links';
 
 export type StreamItem = {
   type: StreamType;
-  entry:
-    | CollectionEntry<'blog'>
-    | CollectionEntry<'projects'>
-    | CollectionEntry<'tools'>;
+  entry: CollectionEntry<'blog'> | CollectionEntry<'links'>;
 };
 
 export async function getAllItems(): Promise<StreamItem[]> {
-  const [blog, projects, tools] = await Promise.all([
+  const [blog, links] = await Promise.all([
     getCollection('blog'),
-    getCollection('projects'),
-    getCollection('tools'),
+    getCollection('links'),
   ]);
 
   const items: StreamItem[] = [
     ...blog.map((entry) => ({ type: 'blog' as const, entry })),
-    ...projects.map((entry) => ({ type: 'projects' as const, entry })),
-    ...tools.map((entry) => ({ type: 'tools' as const, entry })),
+    ...links.map((entry) => ({ type: 'links' as const, entry })),
   ];
 
   items.sort((a, b) => b.entry.data.date.getTime() - a.entry.data.date.getTime());

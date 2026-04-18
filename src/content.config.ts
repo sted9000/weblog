@@ -13,23 +13,15 @@ const blog = defineCollection({
   schema: z.object({ ...base }),
 });
 
-const projects = defineCollection({
-  loader: glob({ pattern: '**/*.md', base: './src/content/projects' }),
-  schema: z.object({
-    ...base,
-    repo: z.string().url().optional(),
-    url: z.string().url().optional(),
-    status: z.enum(['active', 'paused', 'archived', 'shipped']).optional(),
-    screenshot: z.string().optional(),
-  }),
-});
-
-const tools = defineCollection({
-  loader: glob({ pattern: '**/*.md', base: './src/content/tools' }),
+const links = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/links' }),
   schema: z.object({
     ...base,
     url: z.string().url(),
+    via: z.object({ name: z.string(), url: z.string().url().optional() }).optional(),
+    authors: z.array(z.string()).optional(),
+    quote: z.string().optional(),
   }),
 });
 
-export const collections = { blog, projects, tools };
+export const collections = { blog, links };

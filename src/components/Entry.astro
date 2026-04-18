@@ -2,60 +2,64 @@
 import { render } from 'astro:content';
 import type { CollectionEntry } from 'astro:content';
 
-type AnyEntry =
-  | CollectionEntry<'blog'>
-  | CollectionEntry<'projects'>
-  | CollectionEntry<'tools'>;
+type AnyEntry = CollectionEntry<'blog'> | CollectionEntry<'links'>;
 
 interface Props {
   entry: AnyEntry;
-  type: 'blog' | 'projects' | 'tools';
+  type: 'blog' | 'links';
   full?: boolean;
+  hideDate?: boolean;
 }
 
-const { entry, type, full = false } = Astro.props;
+const { entry, type, full = false, hideDate = false } = Astro.props;
 const base = import.meta.env.BASE_URL;
-const href = `${base}/${type}/${entry.id}`;
+const permalink = `${base}/${type}/${entry.id}`;
 const date = entry.data.date;
 const dateStr = date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
 const { Content } = await render(entry);
 
 const typeLabels: Record<string, string> = {
   blog: 'Blog',
-  projects: 'Project',
-  tools: 'Tool',
+  links: 'Link',
 };
+
+const isLink = type === 'links';
+const linkData = isLink ? (entry.data as CollectionEntry<'links'>['data']) : null;
+const titleHref = isLink ? linkData!.url : permalink;
 ---
-<article class="entry">
+<article class={`entry ${isLink ? 'is-link' : ''}`}>
   <div class="entry-header">
     <h2>
-      {full ? entry.data.title : <a href={href}>{entry.data.title}</a>}
+      {full && !isLink ? entry.data.title : <a href={titleHref}>{entry.data.title}</a>}
     </h2>
-    <span class="type-badge">{typeLabels[type]}</span>
+    {!isLink && <span class="type-badge">{typeLabels[type]}</span>}
   </div>
-  <div class="meta">
-    <time datetime={date.toISOString()}>{dateStr}</time>
-  </div>
-
-  {type === 'projects' && (
-    <div class="proj-fields">
-      {(entry.data as any).status && <span>Status: {(entry.data as any).status}</span>}
-      {(entry.data as any).status && ((entry.data as any).repo || (entry.data as any).url) && <span> · </span>}
-      {(entry.data as any).url && <a href={(entry.data as any).url}>Site</a>}
-      {(entry.data as any).url && (entry.data as any).repo && <span> · </span>}
-      {(entry.data as any).repo && <a href={(entry.data as any).repo}>Repo</a>}
+  {(!hideDate || (isLink && linkData!.authors && linkData!.authors.length > 0)) && (
+    <div class="meta">
+      {!hideDate && (
+        <a href={permalink}><time datetime={date.toISOString()}>{dateStr}</time></a>
+      )}
+      {isLink && linkData!.authors && linkData!.authors.length > 0 && (
+        <span>{!hideDate && ' · '}{linkData!.authors.join(', ')}</span>
+      )}
     </div>
   )}
 
-  {type === 'tools' && (entry.data as any).url && (
-    <div class="proj-fields">
-      <a href={(entry.data as any).url}>{(entry.data as any).url}</a>
-    </div>
+  {isLink && linkData!.quote && (
+    <blockquote class="link-quote">{linkData!.quote}</blockquote>
   )}
 
   <div class="entry-body">
     <Content />
   </div>
+
+  {isLink && linkData!.via && (
+    <p class="via">
+      Via {linkData!.via.url
+        ? <a href={linkData!.via.url}>{linkData!.via.name}</a>
+        : linkData!.via.name}
+    </p>
+  )}
 
   {entry.data.tags.length > 0 && (
     <div class="tags">

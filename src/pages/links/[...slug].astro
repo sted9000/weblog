@@ -4,12 +4,12 @@ import Entry from '../../components/Entry.astro';
 import { getCollection } from 'astro:content';
 
 export async function getStaticPaths() {
-  const entries = await getCollection('tools');
+  const entries = await getCollection('links');
   return entries.map((entry) => ({ params: { slug: entry.id }, props: { entry } }));
 }
 
 const { entry } = Astro.props;
 ---
 <Base title={entry.data.title} description={entry.data.description}>
-  <Entry entry={entry} type="tools" full />
+  <Entry entry={entry} type="links" full />
 </Base>
