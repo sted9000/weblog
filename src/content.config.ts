@@ -20,7 +20,6 @@ const links = defineCollection({
     url: z.string().url(),
     via: z.object({ name: z.string(), url: z.string().url().optional() }).optional(),
     authors: z.array(z.string()).optional(),
-    quote: z.string().optional(),
   }),
 });
 

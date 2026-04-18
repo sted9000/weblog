@@ -45,10 +45,6 @@ const titleHref = isLink ? linkData!.url : permalink;
     </div>
   )}
 
-  {isLink && linkData!.quote && (
-    <blockquote class="link-quote">{linkData!.quote}</blockquote>
-  )}
-
   <div class="entry-body">
     <Content />
   </div>

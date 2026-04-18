@@ -36,8 +36,6 @@ Create a new link-blog post for the URL: `$1`
    url: "<url>"
    authors:
      - "<author>"
-   quote: |
-
    ---
 
 
@@ -48,14 +46,13 @@ Create a new link-blog post for the URL: `$1`
    - `tags: []` stays empty for the user to fill.
    - `description` — include only if you found one.
    - `authors` — include only if you found at least one. Use YAML block-list form.
-   - `quote` — always include as an empty block scalar (`quote: |` with a blank line) so the user can paste a quote in.
-   - Leave the post body empty (two trailing newlines after the closing `---`).
+   - Leave the post body empty (two trailing newlines after the closing `---`). Quotes go in the body as a markdown blockquote (`> ...`), not in frontmatter.
    - Escape any `"` inside `title`/`description` by using single quotes on the outer YAML string, or backslash-escape.
 
 5. **Report back.** Print:
    - The file path created
    - Which fields were auto-filled vs left blank
-   - A one-line reminder: "Fill in tags, quote, and body, then run `/link-publish`."
+   - A one-line reminder: "Fill in tags and body (use `> ...` for quotes), then run `/link-publish`."
 
 ## Notes
 - Do not populate `via` — that's for a human referrer ("via @user") and should be added manually when relevant.

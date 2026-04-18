@@ -148,15 +148,6 @@ article.entry:last-child { border-bottom: none; }
 .entry-body p:first-child { margin-top: 0.2rem; }
 .entry-body p:last-child { margin-bottom: 0; }
 
-.link-quote {
-  font-size: 0.98rem;
-  margin: 0.4rem 0 0.3rem;
-  padding: 0 0.8rem;
-  border-left: 2px solid var(--rule);
-  color: var(--fg);
-  font-style: italic;
-}
-
 .via {
   font-family: var(--font-sans);
   font-size: 0.78rem;
