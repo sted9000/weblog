@@ -6,9 +6,9 @@ description: "Browser tool for cropping images to the exact aspect ratios that T
 url: "https://tools.simonwillison.net/social-media-cropper"
 ---
 
-> A picture is worth a thousand words, but only if it's cropped to 1.91:1.
-
 Another single-purpose utility from Simon's growing collection. Every social network has its own preferred aspect ratio for the image that shows up next to a shared link, and getting it wrong means your carefully chosen screenshot gets awkwardly chopped or letterboxed the moment it hits someone's feed.
+
+> A picture is worth a thousand words, but only if it's cropped to 1.91:1.
 
 The cropper runs entirely in the browser — drop in an image, pick a target platform, drag the crop box, and download the result. No upload, no account, no waiting on a server round-trip.
 
