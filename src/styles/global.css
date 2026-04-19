@@ -225,6 +225,19 @@ blockquote p { margin: 0.4rem 0; }
 blockquote p:first-child { margin-top: 0; }
 blockquote p:last-child { margin-bottom: 0; }
 
+blockquote p:has(> cite:only-child),
+blockquote p:has(cite):last-child {
+  font-family: var(--font-sans);
+  font-size: 0.82rem;
+  color: var(--muted);
+  text-align: left;
+  margin-top: 0.55rem;
+}
+
+blockquote cite {
+  font-style: normal;
+}
+
 hr { border: none; border-top: 1px solid var(--border); margin: 1.2rem 0; }
 
 /* Footer ---------------------------------------------------------- */

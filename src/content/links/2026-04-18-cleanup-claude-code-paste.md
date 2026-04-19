@@ -1,16 +1,13 @@
 ---
 title: "Cleanup Claude Code Paste"
 date: 2026-04-18
-tags: [simon willison, claude-code, tools]
-description: "Tool to remove the ❯ prompt, fix wrapped-line whitespace, and join lines into clean text from terminal output."
+tags: [simon willison, claude-code, tools, raycast]
+description: "Claude code fix formatting tools"
 url: "https://tools.simonwillison.net/cleanup-claude-code-paste"
-quote: "Simplicity is prerequisite for reliability."
 ---
 
-One of those tiny utilities that solves a real, niche annoyance. When you paste a transcript out of a terminal running Claude Code, you end up with a mess: the `❯` prompt character in front of every command, ragged whitespace where long lines wrapped, and stray line breaks mid-sentence that make the whole thing unreadable in anything that isn't a terminal.
+I was happy to find this tool by Simon Willison that solved a real annoyance: copy and pasting code from a terminal running Claude Code. The results are a mess. I found myself prompting claude to save the output to a file just so I didn't have to reformat things manually.
 
-Simon's tool does exactly one thing: it strips that noise and gives you back clean, joined text you can paste into a blog post, a bug report, or a Slack message without hand-editing every line.
+I liked this tool so much, but it was still a hassle to use Simon's web tool. So I turned the idea into a Raycast script. It reads the current content of the clipboard and pastes the cleaned up text with command + option + v
 
-![Screenshot of the Cleanup Claude Code Paste tool](https://placehold.co/800x450/1f2937/e5e7eb?text=Cleanup+Claude+Code+Paste)
-
-Single-purpose tools like this are my favorite genre of web utility — no sign-up, no tracking, no "premium tier," just a textarea and a button that does the job.
+![Screenshot of the Raycast script](/weblog/images/2026-04-18-cleanup-claude-code-paste.png)
