@@ -1,7 +1,7 @@
 ---
 title: "Hard truths about building in the AI era | Keith Rabois (Khosla Ventures)"
 date: 2026-04-19
-tags: [lenny, keith-rabois]
+tags: [lenny, keith-rabois, ai, podcast-notes]
 url: "https://www.youtube.com/watch?v=xCd9ykretlg&t=3s"
 authors:
   - "Lenny's Podcast"
