@@ -1,5 +1,5 @@
 ---
-title: "New Tech/VC podcast!"
+title: "New Tech/VC podcast! (and Anthropic's trillion-dollar enterprise bet)"
 date: 2026-04-20
 tags: [podcast-notes, 20VC, anthropic, openai]
 url: "https://www.youtube.com/watch?v=UOY8hsBqjJo"
