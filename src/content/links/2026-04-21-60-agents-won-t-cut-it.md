@@ -14,7 +14,3 @@ They were talking in the context of the PE strategy of acquiring a company and i
 > 60% agents won't cut it
 > 
 > — <cite>Jason Lemkin</cite>
-
-
-
-
