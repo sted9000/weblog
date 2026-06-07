@@ -9,7 +9,6 @@ interface Props {
 const { title, description } = Astro.props;
 const siteTitle = "Ted Slocum's Weblog";
 const fullTitle = title ? `${title} — ${siteTitle}` : siteTitle;
-const base = import.meta.env.BASE_URL;
 ---
 <!DOCTYPE html>
 <html lang="en">
@@ -23,11 +22,11 @@ const base = import.meta.env.BASE_URL;
   <body>
     <div class="wrap">
       <header class="site">
-        <h1><a href={base}>{siteTitle}</a></h1>
+        <h1><a href="/">{siteTitle}</a></h1>
         <nav>
-          <a href={`${base}/blog`}>Blog</a>
-          <a href={`${base}/links`}>Links</a>
-          <a href={`${base}/tags`}>Tags</a>
+          <a href="/blog">Blog</a>
+          <a href="/links">Links</a>
+          <a href="/tags">Tags</a>
         </nav>
       </header>
       <main>
